@@ -65,3 +65,16 @@ means that any changes made to this folder will immediatley be reflected in the
 Docker container, without the need to rebuild the container. It is thus
 recommended to make changes directly in the folder outside the container, and
 then use `catkin_make` and `roslaunch` inside the container to test the changes.
+
+## Multiple terminals
+
+As part of the exercises, it is sometimes necessary to execute multiple
+commands in the same container. You have already learned that you can use
+`docker compose run main` to obtain a terminal in a container. You can start
+another terminal (in your OS, outside the container) and then use
+
+`docker compose exec main bash`
+
+to obtain another bash terminal inside the container.
+
+
