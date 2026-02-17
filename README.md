@@ -53,6 +53,9 @@ Then, you can source the ROS workspace using
 `source devel/setup.bash`
 
 You can then run a `roslaunch` file to launch a ROS application .
+You can test that it works by running
+
+```roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch```
 
 ## Making changes
 
