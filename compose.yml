@@ -1,0 +1,13 @@
+services:                                           
+  main:                                  
+    container_name: ca2
+    build: .                          
+    volumes:                             
+      - "./catkin_ws:/root/catkin_ws:rw"            
+      - "./logging:/logging:rw"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"        
+      - "${HOME}/.Xauthority:/root/.Xauthority:rw"
+    environment:                                          
+      - DISPLAY
+    stdin_open: true        
+    tty: true
