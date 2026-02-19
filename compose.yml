@@ -1,9 +1,10 @@
 services:                                           
   main:                                  
     container_name: ca2
+    hostname: noetic
     build: .                          
     volumes:                             
-      - "./catkin_ws:/root/catkin_ws:rw"            
+      - "./catkin_ws:/home/appuser/catkin_ws:rw"            
       - "./logging:/logging:rw"
       - "/tmp/.X11-unix:/tmp/.X11-unix"        
       - "${HOME}/.Xauthority:/root/.Xauthority:rw"

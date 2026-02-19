@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="talker_listener" name="my_talker" type="talker"/>
+    <node pkg="talker_listener" name="my_listener" type="listener"/>
+</launch>

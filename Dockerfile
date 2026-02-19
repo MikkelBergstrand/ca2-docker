@@ -37,17 +37,27 @@ RUN apt-get update && apt-get install -y \
 	ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
 	ros-noetic-compressed-image-transport ros-noetic-rqt* ros-noetic-rviz \
 	ros-noetic-gmapping ros-noetic-navigation ros-noetic-interactive-markers \
-	ros-noetic-robot-state-publisher
+	ros-noetic-robot-state-publisher ros-noetic-ros-tutorials
+
+RUN apt-get install tmux
 
 RUN apt-get install -y python3-pip && \
 	pip install shapely 
 
-RUN mkdir -p /root/catkin_ws/src
-WORKDIR /root/catkin_ws/src
+ARG UID=1000
+ARG GID=1000
+
+RUN groupadd -g $GID appuser && \
+    useradd -u $UID -g $GID -s /bin/bash -m appuser
+
+USER appuser
 
 ENV TURTLEBOT3_MODEL=waffle_pi
 
-RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
+RUN mkdir -p /home/appuser/catkin_ws/src
+WORKDIR /home/appuser/catkin_ws/src
+
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 #RUN echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
 
 RUN echo "alias eb='nano ~/.bashrc'" >> ~/.bashrc
@@ -64,6 +74,6 @@ RUN echo "source ~/${name_catkin_workspace}/devel/setup.bash" >> ~/.bashrc
 RUN echo "export ROS_MASTER_URI=http://localhost:11311" >> ~/.bashrc
 RUN echo "export ROS_HOSTNAME=localhost" >> ~/.bashrc
 
-WORKDIR /root/catkin_ws
+WORKDIR /home/appuser/catkin_ws
 
 ENTRYPOINT [ "/bin/bash" ]
